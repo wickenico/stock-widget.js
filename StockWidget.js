@@ -3,8 +3,7 @@
 // icon-color: deep-blue; icon-glyph: book; share-sheet-inputs: plain-text;
 // Stock Ticker Widget
 let stocksInfo = await getStockData()
-let api = await randomAPI()
-let widget = await createWidget(api)
+let widget = await createWidget()
 if (config.runsInWidget) {
   // The script runs inside a widget, so we pass our instance of ListWidget to be shown inside the widget on the Home Screen.
   Script.setWidget(widget)
