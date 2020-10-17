@@ -17,8 +17,7 @@ if (config.runsInWidget) {
 Script.complete()
 
 async function createWidget(api) {
- 
- 
+  
   let upticker = SFSymbol.named("chevron.up");
   let downticker = SFSymbol.named("chevron.down");
  
@@ -37,26 +36,25 @@ async function createWidget(api) {
    
     let currentStock = stocksInfo[j];
     let row1 = widget.addStack();
-   
+    // Add Stock Symbol
     let stockSymbol = row1.addText(currentStock.symbol);
     stockSymbol.textColor = Color.white();
     stockSymbol.font = Font.boldMonospacedSystemFont(12);
-   
+    //Add Current Price
     row1.addSpacer();
     let symbolPrice = row1.addText(currentStock.price);
     symbolPrice.textColor = Color.white();
     symbolPrice.font = Font.boldMonospacedSystemFont(12);
    
-
-   
+    //Second Row
     widget.addSpacer(2)
     let row2= widget.addStack();
-   
+    // Add Company name
     let companyName= row2.addText(currentStock.name);
     companyName.textColor = Color.white();
     companyName.textOpacity = 0.7;
     companyName.font = Font.boldMonospacedSystemFont(9);
-   
+    //Add Today's change in price
     row2.addSpacer();
     let changeValue = row2.addText(currentStock.changevalue);
     if(currentStock.changevalue < 0) {
@@ -65,8 +63,8 @@ async function createWidget(api) {
       changeValue.textColor = Color.green();
     }
     changeValue.font = Font.boldMonospacedSystemFont(9);
-   
-   
+    
+    // Add Ticker icon
     row2.addSpacer(2);
     let ticker = null;
     if(currentStock.changevalue < 0){
@@ -85,24 +83,8 @@ async function createWidget(api) {
   return widget
 }
 
-async function randomAPI() {
-  let docs = await loadDocs()
-//   console.log(docs)
-  let apiNames = Object.keys(docs)
-  let num = Math.round(Math.random() * apiNames.length)
-  let apiName = apiNames[num]
-  let api = docs[apiName]
-  return {
-    name: apiName,
-    description: api["!doc"],
-    url: api["!url"]
-  }
-}
-
-async function getStockData() {
- 
+async function getStockData() { 
   let stocks = null;
- 
 // Read from WidgetParameter if present or use hardcoded values
 // Provide values in Widget Parameter as comma seperated list  
   if(args.widgetParameter == null) {
@@ -112,10 +94,8 @@ async function getStockData() {
   }
  
   let stocksdata = [];
- 
   for(i=0; i< stocks.length; i++)
   {
- 
     let stkdata = await queryStockData(stocks[i].trim());
     let price = stkdata.quoteSummary.result[0].price;
     let priceKeys = Object.keys(price);
@@ -134,14 +114,6 @@ async function getStockData() {
   }
   return stocksdata;
 }
-
-async function loadDocs() {
-  let url = "https://docs.scriptable.app/scriptable.json"
-  let req = new Request(url)
-  console.log(req.response)
-  return await req.loadJSON()
-}
-
 
 async function queryStockData(symbol) {
   let url = "https://query1.finance.yahoo.com/v10/finance/quoteSummary/" + symbol + "?modules=price"
