@@ -1,9 +1,22 @@
+/* --------------------------------------------------------------
+Script: btc-usd-course.js
+Author: Nico Wickersheim
+Version: 1.0.0
+
+Description:
+Displays the current bitcoin course in US-Dollar $ based on 
+the data of coinbase API.
+
+Forked from: saiteja09/StockWidget.js "https://gist.github.com/saiteja09/52f15d4b4f30657af51a1336661884a8"
+
+Changelog:
+
+1.0.0: Initialization after fork with some changes
+-------------------------------------------------------------- */
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: deep-blue; icon-glyph: book; share-sheet-inputs: plain-text;
 // Stock Ticker Widget
-
-// forked from: saiteja09/StockWidget.js "https://gist.github.com/saiteja09/52f15d4b4f30657af51a1336661884a8"
 let stocksInfo = await getStockData()
 let widget = await createWidget()
 if (config.runsInWidget) {
@@ -86,8 +99,8 @@ async function createWidget(api) {
 
 async function getStockData() { 
   let stocks = null;
-// Read from WidgetParameter if present or use hardcoded values
-// Provide values in Widget Parameter as comma seperated list  
+  // Read from WidgetParameter if present or use hardcoded values
+  // Provide values in Widget Parameter as comma seperated list  
   if(args.widgetParameter == null) {
     stocks = ["PRGS", "AAPL", "INR=X", "XRP-USD"];
   } else {
