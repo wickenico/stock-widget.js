@@ -2,6 +2,8 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: deep-blue; icon-glyph: book; share-sheet-inputs: plain-text;
 // Stock Ticker Widget
+
+// forked from: saiteja09/StockWidget.js "https://gist.github.com/saiteja09/52f15d4b4f30657af51a1336661884a8"
 let stocksInfo = await getStockData()
 let widget = await createWidget()
 if (config.runsInWidget) {
