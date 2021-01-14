@@ -1,13 +1,12 @@
 /* --------------------------------------------------------------
-Script: btc-usd-course.js
+Script: stock-widget.js
 Author: Nico Wickersheim
 Version: 1.0.0
 
 Description:
-Displays the current bitcoin course in US-Dollar $ based on 
-the data of coinbase API.
+Displays the stock prices from yahoo finance api.
 
-Forked from: saiteja09/StockWidget.js "https://gist.github.com/saiteja09/52f15d4b4f30657af51a1336661884a8"
+Forked from: @saiteja09/StockWidget.js "https://gist.github.com/saiteja09/52f15d4b4f30657af51a1336661884a8"
 
 Changelog:
 
@@ -24,7 +23,7 @@ if (config.runsInWidget) {
   Script.setWidget(widget)
 } else {
   // The script runs inside the app, so we preview the widget.
-  widget.presentSmall()
+  widget.presentMedium()
 }
 // Calling Script.complete() signals to Scriptable that the script have finished running.
 // This can speed up the execution, in particular when running the script from Shortcuts or using Siri.
@@ -56,7 +55,7 @@ async function createWidget(api) {
     stockSymbol.font = Font.boldMonospacedSystemFont(12);
     //Add Current Price
     row1.addSpacer();
-    let symbolPrice = row1.addText(currentStock.price);
+    let symbolPrice = row1.addText(currentStock.currencySymbol + currentStock.price);
     symbolPrice.textColor = Color.white();
     symbolPrice.font = Font.boldMonospacedSystemFont(12);
    
@@ -70,7 +69,7 @@ async function createWidget(api) {
     companyName.font = Font.boldMonospacedSystemFont(9);
     //Add Today's change in price
     row2.addSpacer();
-    let changeValue = row2.addText(currentStock.changevalue);
+    let changeValue = row2.addText(currentStock.changepercent + '%');
     if(currentStock.changevalue < 0) {
       changeValue.textColor = Color.red();
     } else {
@@ -102,7 +101,8 @@ async function getStockData() {
   // Read from WidgetParameter if present or use hardcoded values
   // Provide values in Widget Parameter as comma seperated list  
   if(args.widgetParameter == null) {
-    stocks = ["PRGS", "AAPL", "INR=X", "XRP-USD"];
+    // EDIT: Insert your symbols between the quotation marks 
+    stocks = ["AAPL", "22UA.DE", "GC=F", "BTC-USD"];
   } else {
     stocks = args.widgetParameter.split(",");
   }
@@ -123,6 +123,7 @@ async function getStockData() {
     data.low = price.regularMarketDayLow.raw.toFixed(2);
     data.prevclose = price.regularMarketPreviousClose.raw.toFixed(2);
     data.name = price.shortName;
+    data.currencySymbol = price.currencySymbol;
     stocksdata.push(data);
    
   }
