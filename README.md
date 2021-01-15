@@ -43,5 +43,5 @@ Yahoo Finance: https://finance.yahoo.com/
 
 ## Contribution
 
-If you have any ideas for extensions or changes just let me knoew
+If you have any ideas for extensions or changes just let me know.
 
