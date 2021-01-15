@@ -1,5 +1,7 @@
 # stock-widget.js
 A Scriptable widget that shows stock prices and the percentual change from yahoo finance api. Also works with cryptocurrencies.
+
+
 ![stock-widget-homescreen.small](img/stock-widget-homescreen-small.png)
 
 
